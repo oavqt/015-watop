@@ -1,4 +1,4 @@
-import './css/styles.css';
+require('./css/styles.css');
 
 // Server HMR
 if (module.hot) {

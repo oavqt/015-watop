@@ -9,14 +9,14 @@ const compiler = webpack(config);
 
 server.use(
   webpackDevMiddleware(compiler, {
-    publicPath: '/',
-  }),
+    publicPath: '/'
+  })
 );
 
 server.use(
   webpackHotMiddleware(compiler, {
-    reload: true,
-  }),
+    reload: true
+  })
 );
 
 const staticMiddleware = express.static('dist');

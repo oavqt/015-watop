@@ -12,27 +12,27 @@ const theProductionConfig = {
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
-            options: { publicPath: '../' },
+            options: { publicPath: '../' }
           },
-          'css-loader',
-        ],
+          'css-loader'
+        ]
       },
       {
         test: /\.(png|svg|jpg|jpeg|gir)$/i,
-        type: 'asset',
-      },
-    ],
+        type: 'asset'
+      }
+    ]
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: 'css/[name].css',
+      filename: 'css/[name].css'
     }),
     new ImageMinimizerPlugin({
       minimizerOptions: {
-        plugins: [['optipng', { optimizationlevel: 5 }]],
-      },
-    }),
-  ],
+        plugins: [['optipng', { optimizationlevel: 5 }]]
+      }
+    })
+  ]
 };
 
 module.exports = merge(theBaseConfig, theProductionConfig);

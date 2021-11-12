@@ -3,29 +3,29 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const theBaseConfig = {
   entry: {
-    theMain: './src/index.js',
+    theMain: './src/index.js'
   },
   module: {
     rules: [
       {
         test: /\.(png|svg|jpg|jpeg|gir)$/i,
-        type: 'asset/resource',
-      },
-    ],
+        type: 'asset/resource'
+      }
+    ]
   },
   output: {
     assetModuleFilename: 'images/[name][ext]',
     clean: true,
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/',
+    publicPath: '/'
   },
   plugins: [
     new HTMLWebpackPlugin({
       template: './src/index.html',
-      title: 'Le Weather',
-    }),
-  ],
+      title: 'Le Weather'
+    })
+  ]
 };
 
 module.exports = theBaseConfig;
