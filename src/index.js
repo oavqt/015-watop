@@ -1,4 +1,5 @@
 require('./css/styles.css');
+require('./dom');
 require('./weather');
 
 // Server HMR
