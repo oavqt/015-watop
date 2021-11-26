@@ -1,48 +1,23 @@
-async function fetchWeather(location, unit) {
-  const publicKey = 'c3d8c66c21f63dca9b58e9ae48dcf602';
+import page from './dom';
+import getWeather from './weathertools';
 
-  try {
-    const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${publicKey}&units=${unit}`
-    );
-    const weather = await response.json();
+const storeLocation = (() => {
+  const storage = { location: '' };
 
-    return weather;
-  } catch (err) {
-    throw new Error(err);
-  }
-}
+  const set = (location) => {
+    storage.location = location;
 
-function processWeather(data) {
-  return {
-    weather: {
-      current: data.weather[0].main,
-      description: data.weather[0].description
-    },
-    temperature: {
-      number: {
-        current: data.main.temp,
-        feels: data.main.feels_like,
-        humidity: data.main.humidity,
-        max: data.main.temp_max,
-        min: data.main.temp_min,
-        pressure: data.main.pressure
-      }
-    },
-    wind: {
-      speed: data.wind.speed,
-      deg: data.wind.deg
-    }
+    getWeather(location);
+
+    console.log(storage);
   };
-}
 
-// function displayWeather(weather) {}
+  const onload = () => {
+    if (storage.location !== '') page.home();
+    else page.default();
+  };
 
-async function getWeather(location, unit = 'metric') {
-  const fetch = await fetchWeather(location, unit);
-  const process = processWeather(fetch);
+  return { set, onload };
+})();
 
-  console.log(process);
-}
-
-getWeather('temple');
+export default storeLocation;
