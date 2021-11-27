@@ -1,15 +1,17 @@
 import display from './dom';
 import getWeather from './weathertools';
 
-const storeLocation = (() => {
-  const storage = { location: 'Temple' };
+const weather = (() => {
+  const storage = { location: 'temple, tx' };
 
-  const set = (location) => {
-    storage.location = location;
-
+  const get = (location) => {
     getWeather(location);
 
     console.log(storage);
+  };
+
+  const store = (location) => {
+    storage.location = location;
   };
 
   const onload = () => {
@@ -18,7 +20,7 @@ const storeLocation = (() => {
     else display.skeleton.default();
   };
 
-  return { set, onload };
+  return { get, store, onload };
 })();
 
-export default storeLocation;
+export default weather;

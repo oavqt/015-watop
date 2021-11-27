@@ -1,5 +1,5 @@
 import dom from './domtools';
-import storeLocation from './weather';
+import weather from './weather';
 
 // Temporary HMS
 const tempHMSDOMClear = () => {
@@ -12,7 +12,7 @@ const tempHMSDOMClear = () => {
 //
 
 const setWeather = () => {
-  storeLocation.set(dom.get.value.input.search());
+  weather.get(dom.get.value.input.search());
 };
 
 const setWeatherEvent = () => {
@@ -24,6 +24,6 @@ const setWeatherEvent = () => {
 
 window.addEventListener('load', () => {
   tempHMSDOMClear(); // Temporary HMS
-  storeLocation.onload();
+  weather.onload();
   setWeatherEvent();
 });

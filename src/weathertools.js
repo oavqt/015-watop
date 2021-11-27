@@ -21,7 +21,7 @@ const temperature = {
 };
 
 // Weather functions
-async function fetchWeather(location, unit) {
+async function fetchWeather(location) {
   const publicKey = 'd50e03bdd93c4f7f9b811406212711';
 
   try {
@@ -80,8 +80,8 @@ function displayWeather(process) {
   display.weather(process);
 }
 
-async function getWeather(location, unit = 'metric') {
-  const fetch = await fetchWeather(location, unit);
+async function getWeather(location) {
+  const fetch = await fetchWeather(location);
   const process = processWeather(fetch);
 
   displayWeather(process);

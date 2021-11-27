@@ -70,8 +70,8 @@ const display = {
               element.create('h1', { class: 'location__text' }, 'Temple, Tx'),
               element.create(
                 'button',
-                { class: 'button--edit' },
-                element.create('span', { class: 'edit__text' }, 'Edit')
+                { class: 'button--location--change' },
+                element.create('span', { class: 'change__text' }, 'Change')
               )
             ),
             element.create(
@@ -93,11 +93,15 @@ const display = {
                 element.create('span', { class: 'temperature__number' }, '12'),
                 element.create(
                   'button',
-                  { class: 'button--temperature' },
-                  element.create('span', { class: 'temperature__text' }, '℃'),
+                  { class: 'button--temperature--scales' },
                   element.create(
                     'span',
-                    { class: 'temperature__text__secondary' },
+                    { class: 'scales__text__primary' },
+                    '℃'
+                  ),
+                  element.create(
+                    'span',
+                    { class: 'scales__text__secondary' },
                     ' / ℉'
                   )
                 )
@@ -111,7 +115,7 @@ const display = {
                   element.create(
                     'span',
                     { class: 'feel__text' },
-                    'Feels Like: 0 ℉'
+                    'Feels Like: 0 ℃'
                   )
                 ),
                 element.create(
