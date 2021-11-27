@@ -1,3 +1,5 @@
+import display from './dom';
+
 // Temperature converter
 const temperature = {
   convert: {
@@ -20,11 +22,11 @@ const temperature = {
 
 // Weather functions
 async function fetchWeather(location, unit) {
-  const publicKey = 'c3d8c66c21f63dca9b58e9ae48dcf602';
+  const publicKey = 'd50e03bdd93c4f7f9b811406212711';
 
   try {
     const response = await fetch(
-      `http://api.openweathermap.org/data/2.5/weather?q=${location}&appid=${publicKey}&units=${unit}`
+      `http://api.weatherapi.com/v1/current.json?key=${publicKey}&q=${location}`
     );
     const weather = await response.json();
 
@@ -36,29 +38,46 @@ async function fetchWeather(location, unit) {
 
 function processWeather(data) {
   return {
-    weather: {
-      current: data.weather[0].main,
-      description: data.weather[0].description
-    },
-    temperature: {
-      number: {
-        current: data.main.temp,
-        feels: data.main.feels_like,
-        humidity: data.main.humidity,
-        max: data.main.temp_max,
-        min: data.main.temp_min,
-        pressure: data.main.pressure
+    location: {
+      name: data.location.name,
+      region: data.location.region,
+      country: data.location.country,
+      display: () => {
+        const { name } = data.location;
+        const { region } = data.location;
+        const { country } = data.location;
+
+        if (name !== region) return `${name}, ${region}`;
+        return `${name}, ${country}`;
       }
     },
+    weather: {
+      current: data.current.condition.text,
+      icon: data.current.condition.icon
+    },
+    temperature: {
+      celsius: {
+        current: data.current.temp_c,
+        feels: data.current.feelslike_c
+      },
+      fahrenheit: {
+        current: data.current.temp_f,
+        feels: data.current.feelslike_f
+      }
+    },
+    misc: {
+      humidity: data.current.humidity
+    },
     wind: {
-      speed: data.wind.speed,
-      deg: data.wind.deg
+      kph: data.current.wind_kph,
+      mph: data.current.wind_mph,
+      direction: data.current.wind_dir
     }
   };
 }
 
 function displayWeather(process) {
-  console.log(process);
+  display.weather(process);
 }
 
 async function getWeather(location, unit = 'metric') {

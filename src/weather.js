@@ -1,8 +1,8 @@
-import page from './dom';
+import display from './dom';
 import getWeather from './weathertools';
 
 const storeLocation = (() => {
-  const storage = { location: '' };
+  const storage = { location: 'Temple' };
 
   const set = (location) => {
     storage.location = location;
@@ -13,8 +13,9 @@ const storeLocation = (() => {
   };
 
   const onload = () => {
-    if (storage.location !== '') page.home();
-    else page.default();
+    if (storage.location !== '') display.skeleton.home();
+    // getWeather(storage.location);
+    else display.skeleton.default();
   };
 
   return { set, onload };

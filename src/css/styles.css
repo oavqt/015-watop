@@ -4,6 +4,16 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
+.button--edit,
+.button--temperature {
+  background: none;
+  border: none;
+}
+
 form {
   align-items: center;
   display: flex;
@@ -27,4 +37,70 @@ form {
   height: 50%;
   justify-content: center;
   width: 100%;
+}
+
+.weather__home {
+  align-items: center;
+  display: flex;
+  height: 75%;
+  justify-content: center;
+  margin: auto;
+  width: 75%;
+}
+
+.home__title {
+  display: none;
+}
+
+.home__body {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.body__location {
+  display: flex;
+}
+
+.current__text {
+  margin: 0;
+}
+
+.location__text {
+  font-size: 3rem;
+  margin: 0;
+}
+
+.body__card {
+  display: flex;
+}
+
+.card__description,
+.card__temperature,
+.card__misc {
+  align-items: center;
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 1em;
+}
+
+.card__description,
+.card__misc {
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.temperature__number {
+  font-size: 5rem;
+  font-weight: bold;
+}
+
+.temperature__text {
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+.home__search {
+  display: none;
 }
