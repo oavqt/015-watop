@@ -1,4 +1,4 @@
-import display from './dom';
+import dom from './domtools';
 
 // Temperature converter
 const temperature = {
@@ -53,31 +53,33 @@ function processWeather(data) {
     },
     weather: {
       current: data.current.condition.text,
-      icon: data.current.condition.icon
-    },
-    temperature: {
-      celsius: {
-        current: data.current.temp_c,
-        feels: data.current.feelslike_c
+      icon: data.current.condition.icon,
+      temperature: {
+        celsius: {
+          number: data.current.temp_c,
+          feels: data.current.feelslike_c
+        },
+        fahrenheit: {
+          number: data.current.temp_f,
+          feels: data.current.feelslike_f
+        }
       },
-      fahrenheit: {
-        current: data.current.temp_f,
-        feels: data.current.feelslike_f
+      misc: {
+        humidity: data.current.humidity
+      },
+      wind: {
+        kph: data.current.wind_kph,
+        mph: data.current.wind_mph,
+        direction: data.current.wind_dir
       }
-    },
-    misc: {
-      humidity: data.current.humidity
-    },
-    wind: {
-      kph: data.current.wind_kph,
-      mph: data.current.wind_mph,
-      direction: data.current.wind_dir
     }
   };
 }
 
 function displayWeather(process) {
-  display.weather(process);
+  dom.update.page.home();
+
+  dom.update.weather(process);
 }
 
 async function getWeather(location) {
@@ -85,6 +87,8 @@ async function getWeather(location) {
   const process = processWeather(fetch);
 
   displayWeather(process);
+
+  return process;
 }
 
 export default getWeather;

@@ -62,12 +62,12 @@ const display = {
             element.create(
               'div',
               { class: 'body__current' },
-              element.create('h2', { class: 'current__text' }, 'Clear')
+              element.create('h2', { class: 'current__text' })
             ),
             element.create(
               'div',
               { class: 'body__location' },
-              element.create('h1', { class: 'location__text' }, 'Temple, Tx'),
+              element.create('h1', { class: 'location__text' }),
               element.create(
                 'button',
                 { class: 'button--location--change' },
@@ -80,17 +80,12 @@ const display = {
               element.create(
                 'div',
                 { class: 'card__description' },
-                element.create('img', { class: 'img--description' }),
-                element.create(
-                  'span',
-                  { class: 'description__text' },
-                  'Mostly Clear'
-                )
+                element.create('img', { class: 'img--description' })
               ),
               element.create(
                 'div',
                 { class: 'card__temperature' },
-                element.create('span', { class: 'temperature__number' }, '12'),
+                element.create('span', { class: 'temperature__number' }),
                 element.create(
                   'button',
                   { class: 'button--temperature--scales' },
@@ -111,21 +106,22 @@ const display = {
                 { class: 'card__misc' },
                 element.create(
                   'div',
-                  { class: 'misc__feel' },
+                  { class: 'misc__feels' },
                   element.create(
                     'span',
-                    { class: 'feel__text' },
-                    'Feels Like: 0 ℃'
-                  )
+                    { class: 'feels__text' },
+                    'Feels Like:'
+                  ),
+                  element.create('span', { class: 'feels__number' }),
+                  element.create('span', { class: 'feels__scale' }, '℃')
                 ),
                 element.create(
                   'div',
                   { class: 'misc__wind' },
-                  element.create(
-                    'span',
-                    { class: 'wind__text' },
-                    'Wind Speed: 5mph'
-                  )
+                  element.create('span', { class: 'wind__text' }, 'Wind:'),
+                  element.create('span', { class: 'wind__direction' }),
+                  element.create('span', { class: 'wind__number' }),
+                  element.create('span', { class: 'wind__speed' }, 'kp/h')
                 ),
                 element.create(
                   'div',
@@ -133,8 +129,10 @@ const display = {
                   element.create(
                     'span',
                     { class: 'humidity__text' },
-                    'Humidity : 25%'
-                  )
+                    'Humidity:'
+                  ),
+                  element.create('span', { class: 'humidity__number' }),
+                  element.create('span', { class: 'humidity__percentage' }, '%')
                 )
               )
             )
@@ -160,9 +158,6 @@ const display = {
       );
       document.querySelector('.content').appendChild(homePage);
     }
-  },
-  weather: (process) => {
-    console.log(process);
   }
 };
 

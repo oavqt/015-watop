@@ -2,16 +2,16 @@ import display from './dom';
 import getWeather from './weathertools';
 
 const weather = (() => {
-  const storage = { location: 'temple, tx' };
+  const storage = { location: '' };
 
   const get = (location) => {
-    getWeather(location);
-
-    console.log(storage);
-  };
-
-  const store = (location) => {
-    storage.location = location;
+    getWeather(location)
+      .then((process) => {
+        storage.location = process.location.display();
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
   };
 
   const onload = () => {
@@ -20,7 +20,7 @@ const weather = (() => {
     else display.skeleton.default();
   };
 
-  return { get, store, onload };
+  return { get, onload };
 })();
 
 export default weather;

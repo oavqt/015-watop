@@ -1,15 +1,5 @@
 import dom from './domtools';
-import weather from './weather';
-
-// Temporary HMS
-const tempHMSDOMClear = () => {
-  const content = dom.get.element.content();
-
-  while (content.firstChild) {
-    content.removeChild(content.lastChild);
-  }
-};
-//
+import weather from './weather'; //
 
 const setWeather = () => {
   weather.get(dom.get.value.input.search());
@@ -23,7 +13,7 @@ const setWeatherEvent = () => {
 };
 
 window.addEventListener('load', () => {
-  tempHMSDOMClear(); // Temporary HMS
+  dom.clear(); // Temporary HMS
   weather.onload();
   setWeatherEvent();
 });
