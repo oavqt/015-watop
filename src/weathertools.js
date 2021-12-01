@@ -1,5 +1,3 @@
-import dom from './domtools';
-
 // Temperature converter
 const temperature = {
   convert: {
@@ -47,7 +45,7 @@ function processWeather(data) {
         const { region } = data.location;
         const { country } = data.location;
 
-        if (name !== region) return `${name}, ${region}`;
+        if (country === 'United States of America') return `${name}, ${region}`;
         return `${name}, ${country}`;
       }
     },
@@ -76,19 +74,15 @@ function processWeather(data) {
   };
 }
 
-function displayWeather(process) {
-  dom.update.page.home();
-
-  dom.update.weather(process);
-}
-
 async function getWeather(location) {
-  const fetch = await fetchWeather(location);
-  const process = processWeather(fetch);
+  try {
+    const fetch = await fetchWeather(location);
+    const process = processWeather(fetch);
 
-  displayWeather(process);
-
-  return process;
+    return process;
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export default getWeather;

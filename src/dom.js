@@ -88,16 +88,17 @@ const display = {
                 element.create('span', { class: 'temperature__number' }),
                 element.create(
                   'button',
-                  { class: 'button--temperature--scales' },
+                  { class: 'button--temperature--symbol --celsius' },
                   element.create(
                     'span',
-                    { class: 'scales__text__primary' },
+                    { class: 'symbol__text__primary' },
                     '℃'
                   ),
+                  element.create('span', { class: 'symbol__divider' }, '/'),
                   element.create(
                     'span',
-                    { class: 'scales__text__secondary' },
-                    ' / ℉'
+                    { class: 'symbol__text__secondary' },
+                    '℉'
                   )
                 )
               ),
@@ -113,7 +114,7 @@ const display = {
                     'Feels Like:'
                   ),
                   element.create('span', { class: 'feels__number' }),
-                  element.create('span', { class: 'feels__scale' }, '℃')
+                  element.create('span', { class: 'feels__symbol' }, '℃')
                 ),
                 element.create(
                   'div',
@@ -121,7 +122,7 @@ const display = {
                   element.create('span', { class: 'wind__text' }, 'Wind:'),
                   element.create('span', { class: 'wind__direction' }),
                   element.create('span', { class: 'wind__number' }),
-                  element.create('span', { class: 'wind__speed' }, 'kp/h')
+                  element.create('span', { class: 'wind__symbol' }, 'kp/h')
                 ),
                 element.create(
                   'div',

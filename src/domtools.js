@@ -26,12 +26,15 @@ const dom = {
           number: () => {
             return document.querySelector('.temperature__number');
           },
-          scales: {
+          symbol: {
             primary: () => {
-              return document.querySelector('.scales__text__primary');
+              return document.querySelector('.symbol__text__primary');
             },
             secondary: () => {
-              return document.querySelector('.scales__text__secondary');
+              return document.querySelector('.symbol__text__secondary');
+            },
+            feels: () => {
+              return document.querySelector('.feels__symbol');
             }
           },
           feels: () => {
@@ -44,8 +47,8 @@ const dom = {
             number: () => {
               return document.querySelector('.wind__number');
             },
-            speed: () => {
-              return document.querySelector('.wind__speed');
+            symbol: () => {
+              return document.querySelector('.wind__symbol');
             }
           },
           humidity: () => {
@@ -70,8 +73,8 @@ const dom = {
         change: () => {
           return document.querySelector('.button--location--change');
         },
-        scales: () => {
-          return document.querySelector('.button--temperature--scales');
+        symbol: () => {
+          return document.querySelector('.button--temperature--symbol');
         }
       }
     },
@@ -83,46 +86,89 @@ const dom = {
       }
     }
   },
-  update: {
+  display: {
     page: {
       default: () => {
-        dom.clear();
+        dom.display.clear();
 
         display.skeleton.default();
       },
       home: () => {
-        dom.clear();
+        dom.display.clear();
 
         display.skeleton.home();
       }
     },
-    weather: (process) => {
-      const currentWeather = dom.get.element.weather.temperature.current();
-      const location = dom.get.element.weather.location();
-      const imgWeather = dom.get.element.image.description();
-      const numberTemperature = dom.get.element.weather.temperature.number();
-      const feels = dom.get.element.weather.temperature.feels();
-      const windDirection =
-        dom.get.element.weather.temperature.wind.direction();
-      const windNumber = dom.get.element.weather.temperature.wind.number();
-      const humidity = dom.get.element.weather.temperature.humidity();
+    update: {
+      home: {
+        weather: (process) => {
+          const currentWeather = dom.get.element.weather.temperature.current();
+          const location = dom.get.element.weather.location();
+          const imgWeather = dom.get.element.image.description();
+          const temperatureNumber =
+            dom.get.element.weather.temperature.number();
+          const feels = dom.get.element.weather.temperature.feels();
+          const windDirection =
+            dom.get.element.weather.temperature.wind.direction();
+          const windNumber = dom.get.element.weather.temperature.wind.number();
+          const humidity = dom.get.element.weather.temperature.humidity();
 
-      currentWeather.textContent = process.weather.current;
-      location.textContent = process.location.display();
-      imgWeather.src = process.weather.icon;
-      numberTemperature.textContent =
-        process.weather.temperature.celsius.number;
-      feels.textContent = process.weather.temperature.celsius.feels;
-      windDirection.textContent = process.weather.wind.direction;
-      windNumber.textContent = process.weather.wind.kph;
-      humidity.textContent = process.weather.misc.humidity;
-    }
-  },
-  clear: () => {
-    const content = document.querySelector('.content');
+          currentWeather.textContent = process.weather.current;
+          location.textContent = process.location.display();
+          imgWeather.src = process.weather.icon;
+          temperatureNumber.textContent =
+            process.weather.temperature.celsius.number;
+          feels.textContent = process.weather.temperature.celsius.feels;
+          windDirection.textContent = process.weather.wind.direction;
+          windNumber.textContent = process.weather.wind.kph;
+          humidity.textContent = process.weather.misc.humidity;
+        }
+      },
+      symbol: (process, option = 'celsius') => {
+        const buttonSymbol = dom.get.element.button.symbol();
+        const temperatureNumber = dom.get.element.weather.temperature.number();
+        const primarySymbol =
+          dom.get.element.weather.temperature.symbol.primary();
+        const secondarySymbol =
+          dom.get.element.weather.temperature.symbol.secondary();
+        const feels = dom.get.element.weather.temperature.feels();
+        const feelsSymbol = dom.get.element.weather.temperature.symbol.feels();
+        const windNumber = dom.get.element.weather.temperature.wind.number();
+        const windSymbol = dom.get.element.weather.temperature.wind.symbol();
 
-    while (content.firstChild) {
-      content.removeChild(content.lastChild);
+        if (option === 'fahrenheit') {
+          temperatureNumber.textContent =
+            process.weather.temperature.fahrenheit.number;
+          primarySymbol.textContent = '℉';
+          secondarySymbol.textContent = '℃';
+          feels.textContent = process.weather.temperature.fahrenheit.feels;
+          feelsSymbol.textContent = '℉';
+          windNumber.textContent = process.weather.wind.mph;
+          windSymbol.textContent = 'mph';
+
+          buttonSymbol.classList.remove('--celsius');
+          buttonSymbol.classList.add('--fahrenheit');
+        } else {
+          temperatureNumber.textContent =
+            process.weather.temperature.celsius.number;
+          primarySymbol.textContent = '℃';
+          secondarySymbol.textContent = '℉';
+          feels.textContent = process.weather.temperature.celsius.feels;
+          feelsSymbol.textContent = '℃';
+          windNumber.textContent = process.weather.wind.kph;
+          windSymbol.textContent = 'kp/h';
+
+          buttonSymbol.classList.remove('--fahrenheit');
+          buttonSymbol.classList.add('--celsius');
+        }
+      }
+    },
+    clear: () => {
+      const content = document.querySelector('.content');
+
+      while (content.firstChild) {
+        content.removeChild(content.lastChild);
+      }
     }
   }
 };

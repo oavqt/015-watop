@@ -1,26 +1,51 @@
-import display from './dom';
 import getWeather from './weathertools';
 
 const weather = (() => {
-  const storage = { location: '' };
+  let storage = {};
 
-  const get = (location) => {
-    getWeather(location)
-      .then((process) => {
-        storage.location = process.location.display();
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
+  const get = async (location) => {
+    try {
+      const weatherData = await getWeather(location);
+
+      storage = weatherData;
+
+      return storage;
+    } catch (err) {
+      throw new Error(err);
+    }
   };
 
   const onload = () => {
-    if (storage.location !== '') display.skeleton.home();
-    // getWeather(storage.location);
-    else display.skeleton.default();
+    if (storage.location !== undefined) {
+      getWeather(storage.location.display());
+      return 'done';
+    }
+
+    return 'default';
   };
 
-  return { get, onload };
+  const symbol = () => {
+    return {
+      weather: {
+        temperature: {
+          celsius: {
+            number: storage.weather.temperature.celsius.number,
+            feels: storage.weather.temperature.celsius.feels
+          },
+          fahrenheit: {
+            number: storage.weather.temperature.fahrenheit.number,
+            feels: storage.weather.temperature.fahrenheit.feels
+          }
+        },
+        wind: {
+          kph: storage.weather.wind.kph,
+          mph: storage.weather.wind.mph
+        }
+      }
+    };
+  };
+
+  return { get, onload, symbol };
 })();
 
 export default weather;
