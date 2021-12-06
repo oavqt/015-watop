@@ -6,10 +6,7 @@ const dom = {
       content: () => {
         return document.querySelector('.content');
       },
-      homePage: {
-        change: () => {
-          return document.querySelector('.change__text');
-        },
+      page: {
         search: () => {
           return document.querySelector('.home__search');
         }
@@ -24,7 +21,7 @@ const dom = {
             return document.querySelector('.current__text');
           },
           number: () => {
-            return document.querySelector('.temperature__number');
+            return document.querySelector('.number__text');
           },
           symbol: {
             primary: () => {
@@ -62,49 +59,54 @@ const dom = {
         }
       },
       input: {
-        search: () => {
-          return document.querySelector('.input--search');
+        location: () => {
+          return document.querySelector('.input--location');
+        },
+        celsius: () => {
+          return document.querySelector('.input--celsius');
+        },
+        fahrenheit: () => {
+          return document.querySelector('.input--fahrenheit');
         }
       },
       button: {
         search: () => {
           return document.querySelector('.button--search');
         },
+        cancel: () => {
+          return document.querySelector('.button--cancel');
+        },
         change: () => {
           return document.querySelector('.button--location--change');
-        },
-        symbol: () => {
-          return document.querySelector('.button--temperature--symbol');
         }
       }
     },
     value: {
       input: {
-        search: () => {
-          return document.querySelector('.input--search').value;
+        location: () => {
+          return document.querySelector('.input--location').value;
+        },
+        symbol: () => {
+          const radio = [
+            ...document.querySelectorAll('.input--celsius, .input--fahrenheit')
+          ];
+
+          return radio.find((input) => input.checked).value;
         }
       }
     }
   },
   display: {
-    page: {
-      default: () => {
-        dom.display.clear();
-
-        display.skeleton.default();
-      },
-      home: () => {
-        dom.display.clear();
-
-        display.skeleton.home();
+    load: {
+      skeleton: () => {
+        display.skeleton();
       }
     },
     update: {
-      home: {
+      page: {
         weather: (process) => {
           const currentWeather = dom.get.element.weather.temperature.current();
           const location = dom.get.element.weather.location();
-          const imgWeather = dom.get.element.image.description();
           const temperatureNumber =
             dom.get.element.weather.temperature.number();
           const feels = dom.get.element.weather.temperature.feels();
@@ -115,7 +117,6 @@ const dom = {
 
           currentWeather.textContent = process.weather.current;
           location.textContent = process.location.display();
-          imgWeather.src = process.weather.icon;
           temperatureNumber.textContent =
             process.weather.temperature.celsius.number;
           feels.textContent = process.weather.temperature.celsius.feels;

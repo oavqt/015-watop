@@ -51,23 +51,22 @@ function processWeather(data) {
     },
     weather: {
       current: data.current.condition.text,
-      icon: data.current.condition.icon,
       temperature: {
         celsius: {
-          number: data.current.temp_c,
-          feels: data.current.feelslike_c
+          number: Math.round(data.current.temp_c),
+          feels: Math.round(data.current.feelslike_c)
         },
         fahrenheit: {
-          number: data.current.temp_f,
-          feels: data.current.feelslike_f
+          number: Math.round(data.current.temp_f),
+          feels: Math.round(data.current.feelslike_f)
         }
       },
       misc: {
         humidity: data.current.humidity
       },
       wind: {
-        kph: data.current.wind_kph,
-        mph: data.current.wind_mph,
+        kph: Math.round(data.current.wind_kph),
+        mph: Math.round(data.current.wind_mph),
         direction: data.current.wind_dir
       }
     }

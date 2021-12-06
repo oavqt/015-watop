@@ -8,16 +8,57 @@ button:hover {
   cursor: pointer;
 }
 
+.button--cancel,
+.button--search {
+  border: none;
+  border-radius: 1em;
+  height: 2em;
+  width: 5em;
+}
+
 .button--location--change,
 .button--temperature--symbol {
   background: none;
   border: none;
 }
 
-form {
+.form--option {
   align-items: center;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-evenly;
+}
+
+.label--celsius:hover,
+.label--fahrenheit:hover {
+  cursor: pointer;
+}
+
+.label--symbol {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.img--description {
+  height: auto;
+  width: 8em;
+}
+
+input[type='radio']:hover {
+  cursor: pointer;
+}
+
+.input--location {
+  border: 0.1em solid transparent;
+  box-shadow: inset 0 0 1em 0px #31313131;
+  height: 2em;
+  width: 25em;
+}
+
+.input--location:focus {
+  border: 0.1em solid #1c87c9;
+  outline: none;
 }
 
 .content {
@@ -27,15 +68,6 @@ form {
 
 .content__weather {
   height: 100%;
-  width: 100%;
-}
-
-.weather__default {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  height: 50%;
-  justify-content: center;
   width: 100%;
 }
 
@@ -56,6 +88,9 @@ form {
   align-items: flex-start;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  height: 25%;
+  position: relative;
   width: 100%;
 }
 
@@ -77,8 +112,8 @@ form {
 }
 
 .card__description,
-.card__temperature,
-.card__misc {
+.card__misc,
+.card__temperature {
   align-items: center;
   display: flex;
   justify-content: space-evenly;
@@ -109,6 +144,31 @@ form {
   font-weight: bold;
 }
 
-.home__search {
-  display: none;
+.body__overlay {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+}
+
+.overlay__option {
+  height: 65%;
+}
+
+.option__symbol {
+  align-self: flex-end;
+  width: 45%;
+}
+
+.celsius__text,
+.fahrenheit__text {
+  margin-left: 0.2em;
+}
+
+.option__button {
+  display: flex;
+  justify-content: space-evenly;
+  width: 45%;
 }

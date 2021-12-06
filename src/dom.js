@@ -1,164 +1,184 @@
 import element from './element';
+import placeholder from './images/placeholder.png';
 
 const display = {
-  skeleton: {
-    default: () => {
-      const defaultPage = element.create(
+  skeleton: () => {
+    const page = element.create(
+      'div',
+      { class: 'content__weather' },
+      element.create(
         'div',
-        { class: 'content__weather' },
+        { class: 'weather__home' },
         element.create(
           'div',
-          { class: 'weather__default' },
+          { class: 'home__title' },
+          element.create('h1', { class: 'title__text' }, 'Le Weather')
+        ),
+        element.create(
+          'div',
+          { class: 'home__body' },
           element.create(
             'div',
-            { class: 'default__title' },
-            element.create('h1', { class: 'title__text' }, 'Le Weather')
+            { class: 'body__current' },
+            element.create('h2', { class: 'current__text' }, 'Unknown')
           ),
           element.create(
             'div',
-            { class: 'default__search' },
+            { class: 'body__location' },
+            element.create('h1', { class: 'location__text' }, 'Unknown'),
             element.create(
-              'div',
-              { class: 'search__title' },
-              element.create(
-                'h2',
-                { class: 'title__text' },
-                'Welcome, please enter your location to get the latest weather information for your area'
-              )
-            ),
-            element.create(
-              'form',
-              { class: 'form--search' },
-              element.create(
-                'label',
-                { class: 'label--search' },
-                element.create('input', {
-                  class: 'input--search',
-                  placeholder: 'Tokyo, London, Tel-Aviv...'
-                })
-              ),
-              element.create('button', { class: 'button--search' }, 'Search')
+              'button',
+              { class: 'button--location--change' },
+              element.create('span', { class: 'change__text' }, 'Change')
             )
-          )
-        )
-      );
-      document.querySelector('.content').appendChild(defaultPage);
-    },
-    home: () => {
-      const homePage = element.create(
-        'div',
-        { class: 'content__weather' },
-        element.create(
-          'div',
-          { class: 'weather__home' },
-          element.create(
-            'div',
-            { class: 'home__title' },
-            element.create('h1', { class: 'title__text' }, 'Le Weather')
           ),
           element.create(
             'div',
-            { class: 'home__body' },
+            { class: 'body__card' },
             element.create(
               'div',
-              { class: 'body__current' },
-              element.create('h2', { class: 'current__text' })
+              { class: 'card__description' },
+              element.create('img', {
+                class: 'img--description',
+                src: placeholder
+              })
             ),
             element.create(
               'div',
-              { class: 'body__location' },
-              element.create('h1', { class: 'location__text' }),
+              { class: 'card__temperature' },
               element.create(
-                'button',
-                { class: 'button--location--change' },
-                element.create('span', { class: 'change__text' }, 'Change')
+                'div',
+                { class: 'temperature__number' },
+                element.create('span', { class: 'number__text' }, '000')
+              ),
+              element.create(
+                'div',
+                { class: 'temperature--symbol --celsius' },
+                element.create('span', { class: 'symbol__text__primary' }, '℃'),
+                element.create('span', { class: 'symbol__divider' }, '/'),
+                element.create(
+                  'span',
+                  { class: 'symbol__text__secondary' },
+                  '℉'
+                )
               )
             ),
             element.create(
               'div',
-              { class: 'body__card' },
+              { class: 'card__misc' },
               element.create(
                 'div',
-                { class: 'card__description' },
-                element.create('img', { class: 'img--description' })
+                { class: 'misc__feels' },
+                element.create('span', { class: 'feels__text' }, 'Feels Like:'),
+                element.create('span', { class: 'feels__number' }, '000'),
+                element.create('span', { class: 'feels__symbol' }, '℃')
               ),
               element.create(
                 'div',
-                { class: 'card__temperature' },
-                element.create('span', { class: 'temperature__number' }),
+                { class: 'misc__wind' },
+                element.create('span', { class: 'wind__text' }, 'Wind:'),
+                element.create('span', { class: 'wind__direction' }, 'Unknown'),
+                element.create('span', { class: 'wind__number' }, '000'),
+                element.create('span', { class: 'wind__symbol' }, 'kp/h')
+              ),
+              element.create(
+                'div',
+                { class: 'misc__humidity' },
                 element.create(
-                  'button',
-                  { class: 'button--temperature--symbol --celsius' },
+                  'span',
+                  { class: 'humidity__text' },
+                  'Humidity:'
+                ),
+                element.create('span', { class: 'humidity__number' }, '000'),
+                element.create('span', { class: 'humidity__percentage' }, '%')
+              )
+            )
+          ),
+          element.create(
+            'div',
+            { class: 'body__overlay' },
+            element.create(
+              'div',
+              { class: 'overlay__option' },
+              element.create(
+                'form',
+                { class: 'form--option' },
+                element.create(
+                  'div',
+                  { class: 'option__location' },
                   element.create(
-                    'span',
-                    { class: 'symbol__text__primary' },
-                    '℃'
+                    'label',
+                    { class: 'label--location' },
+                    element.create('input', {
+                      class: 'input--location',
+                      placeholder: 'Location'
+                    })
+                  )
+                ),
+                element.create(
+                  'div',
+                  { class: 'option__symbol' },
+                  element.create(
+                    'label',
+                    { class: 'label--symbol' },
+                    element.create(
+                      'label',
+                      {
+                        class: 'label--celsius'
+                      },
+                      element.create('input', {
+                        class: 'input--celsius',
+                        type: 'radio',
+                        name: 'symbol',
+                        value: 'celsius',
+                        checked: true
+                      }),
+                      element.create(
+                        'span',
+                        { class: 'celsius__text' },
+                        'Celsius'
+                      )
+                    ),
+                    element.create(
+                      'label',
+                      {
+                        class: 'label--fahrenheit'
+                      },
+                      element.create('input', {
+                        class: 'input--fahrenheit',
+                        type: 'radio',
+                        name: 'symbol',
+                        value: 'fahrenheit'
+                      }),
+                      element.create(
+                        'span',
+                        { class: 'fahrenheit__text' },
+                        'Fahrenheit'
+                      )
+                    )
+                  )
+                ),
+                element.create(
+                  'div',
+                  { class: 'option__button' },
+                  element.create(
+                    'button',
+                    { class: 'button--search' },
+                    'Search'
                   ),
-                  element.create('span', { class: 'symbol__divider' }, '/'),
                   element.create(
-                    'span',
-                    { class: 'symbol__text__secondary' },
-                    '℉'
+                    'button',
+                    { class: 'button--cancel' },
+                    'Cancel'
                   )
                 )
-              ),
-              element.create(
-                'div',
-                { class: 'card__misc' },
-                element.create(
-                  'div',
-                  { class: 'misc__feels' },
-                  element.create(
-                    'span',
-                    { class: 'feels__text' },
-                    'Feels Like:'
-                  ),
-                  element.create('span', { class: 'feels__number' }),
-                  element.create('span', { class: 'feels__symbol' }, '℃')
-                ),
-                element.create(
-                  'div',
-                  { class: 'misc__wind' },
-                  element.create('span', { class: 'wind__text' }, 'Wind:'),
-                  element.create('span', { class: 'wind__direction' }),
-                  element.create('span', { class: 'wind__number' }),
-                  element.create('span', { class: 'wind__symbol' }, 'kp/h')
-                ),
-                element.create(
-                  'div',
-                  { class: 'misc__humidity' },
-                  element.create(
-                    'span',
-                    { class: 'humidity__text' },
-                    'Humidity:'
-                  ),
-                  element.create('span', { class: 'humidity__number' }),
-                  element.create('span', { class: 'humidity__percentage' }, '%')
-                )
               )
-            )
-          ),
-          element.create(
-            'div',
-            { class: 'home__search' },
-            element.create(
-              'form',
-              { class: 'form--search' },
-              element.create(
-                'label',
-                { class: 'label--search' },
-                element.create('input', {
-                  class: 'input--search',
-                  placeholder: 'Tokyo, London, Tel-Aviv...'
-                })
-              ),
-              element.create('button', { class: 'button--search' }, 'Search')
             )
           )
         )
-      );
-      document.querySelector('.content').appendChild(homePage);
-    }
+      )
+    );
+    document.querySelector('.content').appendChild(page);
   }
 };
 
