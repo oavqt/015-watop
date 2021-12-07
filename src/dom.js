@@ -53,14 +53,8 @@ const display = {
               ),
               element.create(
                 'div',
-                { class: 'temperature--symbol --celsius' },
-                element.create('span', { class: 'symbol__text__primary' }, '℃'),
-                element.create('span', { class: 'symbol__divider' }, '/'),
-                element.create(
-                  'span',
-                  { class: 'symbol__text__secondary' },
-                  '℉'
-                )
+                { class: 'temperature__symbol --celsius' },
+                element.create('span', { class: 'symbol__text' }, '℃')
               )
             ),
             element.create(

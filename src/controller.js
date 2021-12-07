@@ -4,9 +4,10 @@ import weather from './weather';
 const setWeather = async () => {
   try {
     const weatherData = await weather.get(dom.get.value.input.location());
+    const weatherSymbol = dom.get.value.input.symbol();
 
     dom.display.load.skeleton();
-    dom.display.update.page.weather(weatherData);
+    dom.display.update.page.weather(weatherData, weatherSymbol);
   } catch (err) {
     throw new Error(err);
   }
