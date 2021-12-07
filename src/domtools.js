@@ -111,6 +111,14 @@ const dom = {
     load: {
       skeleton: () => {
         display.skeleton();
+      },
+      default: () => {
+        display.skeleton();
+        dom.display.update.page.overlay.default();
+      },
+      home: () => {
+        display.skeleton();
+        dom.display.update.page.overlay.home();
       }
     },
     update: {
@@ -141,6 +149,20 @@ const dom = {
             body.classList.remove('--fade--out');
 
             overlay.classList.add('--fade--out');
+            body.classList.add('--fade--in');
+          },
+          default: () => {
+            const overlay = dom.get.element.page.overlay();
+            const body = dom.get.element.weather.body();
+
+            body.classList.add('--visibility--hidden');
+            overlay.classList.add('--fade--in');
+          },
+          home: () => {
+            const overlay = dom.get.element.page.overlay();
+            const body = dom.get.element.weather.body();
+
+            overlay.classList.add('--visibility--hidden');
             body.classList.add('--fade--in');
           }
         },

@@ -1,9 +1,11 @@
 import dom from './domtools';
 import weather from './weather';
 
-const setWeather = async () => {
+const setLocation = async () => {
   try {
-    const weatherData = await weather.get(dom.get.value.input.location());
+    const weatherData = await weather.get.weather(
+      dom.get.value.input.location()
+    );
     const weatherSymbol = dom.get.value.input.symbol();
 
     if (weatherData === 400)
@@ -12,7 +14,8 @@ const setWeather = async () => {
     return (
       dom.display.update.page.overlay.inactive(),
       dom.display.load.skeleton(),
-      dom.display.update.page.weather(weatherData, weatherSymbol)
+      dom.display.update.page.weather(weatherData, weatherSymbol),
+      weather.update.symbol(weatherSymbol)
     );
   } catch (err) {
     throw new Error(err);
@@ -23,9 +26,9 @@ const editLocation = () => {
   dom.display.update.page.overlay.active();
 };
 
-const setWeatherEvent = () => {
+const setLocationEvent = () => {
   dom.get.element.button.search().addEventListener('click', (e) => {
-    setWeather();
+    setLocation();
     e.preventDefault();
   });
 };
@@ -37,21 +40,25 @@ const editLocationEvent = () => {
   });
 };
 
-const loadEvents = () => {
-  setWeatherEvent();
+const loadLocationEvents = () => {
+  setLocationEvent();
   editLocationEvent();
 };
 
-const onload = () => {
-  const start = weather.onload();
+const onload = async () => {
+  const [weatherData, weatherSymbol] = await weather.onload();
 
-  if (start === 'done') return;
+  if (weatherData !== 'default') {
+    dom.display.load.home();
+    dom.display.update.page.weather(weatherData, weatherSymbol);
+  } else {
+    dom.display.load.default();
+  }
 
-  dom.display.load.skeleton();
+  loadLocationEvents();
 };
 
 window.addEventListener('load', () => {
   dom.display.clear(); // Temporary HMS
   onload();
-  loadEvents();
 });

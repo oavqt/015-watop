@@ -8,6 +8,14 @@
   animation: fade-out 0.3s ease-out forwards;
 }
 
+.--visibility--hidden {
+  visibility: hidden;
+}
+
+.--visibility--visible {
+  visibility: visible;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }

@@ -1,53 +1,72 @@
 import getWeather from './weathertools';
 
 const weather = (() => {
-  let storage = {};
+  const storage = {
+    data: { location: 'temple, tx' },
+    symbol: {}
+  };
 
-  const get = async (location) => {
+  const update = {
+    storage: (location) => {
+      storage.data = location;
+    },
+    symbol: (symbol) => {
+      storage.symbol.value = symbol;
+    }
+  };
+
+  const get = {
+    weather: async (location) => {
+      try {
+        const weatherData = await getWeather(location);
+
+        if (weatherData === 400) return weatherData;
+
+        update.storage(weatherData);
+
+        return storage.data;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
+    symbol: () => {
+      return {
+        weather: {
+          temperature: {
+            celsius: {
+              number: storage.data.locationweather.temperature.celsius.number,
+              feels: storage.data.locationweather.temperature.celsius.feels
+            },
+            fahrenheit: {
+              number:
+                storage.data.locationweather.temperature.fahrenheit.number,
+              feels: storage.data.locationweather.temperature.fahrenheit.feels
+            }
+          },
+          wind: {
+            kph: storage.data.locationweather.wind.kph,
+            mph: storage.data.locationweather.wind.mph
+          }
+        }
+      };
+    }
+  };
+
+  const onload = async () => {
     try {
-      const weatherData = await getWeather(location);
+      if (storage.data.location !== undefined) {
+        await get.weather(storage.data.location);
 
-      if (weatherData === 400) return weatherData;
+        return [storage.data, storage.symbol.value];
+      }
 
-      storage = weatherData;
-
-      return storage;
+      return 'default';
     } catch (err) {
       throw new Error(err);
     }
   };
 
-  const onload = () => {
-    if (storage.location !== undefined) {
-      getWeather(storage.location.display());
-      return 'done';
-    }
-
-    return 'default';
-  };
-
-  const symbol = () => {
-    return {
-      weather: {
-        temperature: {
-          celsius: {
-            number: storage.weather.temperature.celsius.number,
-            feels: storage.weather.temperature.celsius.feels
-          },
-          fahrenheit: {
-            number: storage.weather.temperature.fahrenheit.number,
-            feels: storage.weather.temperature.fahrenheit.feels
-          }
-        },
-        wind: {
-          kph: storage.weather.wind.kph,
-          mph: storage.weather.wind.mph
-        }
-      }
-    };
-  };
-
-  return { get, onload, symbol };
+  return { update, get, onload };
 })();
 
 export default weather;
