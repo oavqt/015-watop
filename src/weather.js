@@ -7,6 +7,8 @@ const weather = (() => {
     try {
       const weatherData = await getWeather(location);
 
+      if (weatherData === 400) return weatherData;
+
       storage = weatherData;
 
       return storage;

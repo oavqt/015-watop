@@ -13,8 +13,13 @@ const dom = {
       },
 
       weather: {
-        location: () => {
-          return document.querySelector('.location__text');
+        location: {
+          name: () => {
+            return document.querySelector('.location__text');
+          },
+          error: () => {
+            return document.querySelector('.location__error');
+          }
         },
         temperature: {
           current: () => {
@@ -101,9 +106,25 @@ const dom = {
     },
     update: {
       page: {
+        location: {
+          error: (error) => {
+            const err = dom.get.element.weather.location.error();
+
+            if (error === 400) {
+              err.textContent = 'Please enter a valid location name.';
+
+              err.classList.add('location__error--active');
+            } else {
+              err.textContent =
+                'We are sorry, Le weather is currently unavailable.';
+
+              err.classList.add('location__error--active');
+            }
+          }
+        },
         weather: (process, symbol = 'celsius') => {
           const currentWeather = dom.get.element.weather.temperature.current();
-          const location = dom.get.element.weather.location();
+          const location = dom.get.element.weather.location.name();
           const temperatureNumber =
             dom.get.element.weather.temperature.number();
           const temperatureSymbol =

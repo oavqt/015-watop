@@ -6,8 +6,13 @@ const setWeather = async () => {
     const weatherData = await weather.get(dom.get.value.input.location());
     const weatherSymbol = dom.get.value.input.symbol();
 
-    dom.display.load.skeleton();
-    dom.display.update.page.weather(weatherData, weatherSymbol);
+    if (weatherData === 400)
+      return dom.display.update.page.location.error(weatherData);
+
+    return (
+      dom.display.load.skeleton(),
+      dom.display.update.page.weather(weatherData, weatherSymbol)
+    );
   } catch (err) {
     throw new Error(err);
   }

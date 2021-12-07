@@ -26,7 +26,10 @@ async function fetchWeather(location) {
     const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=${publicKey}&q=${location}`
     );
+
     const weather = await response.json();
+
+    if (response.status === 400) return response.status;
 
     return weather;
   } catch (err) {
@@ -76,6 +79,9 @@ function processWeather(data) {
 async function getWeather(location) {
   try {
     const fetch = await fetchWeather(location);
+
+    if (fetch === 400) return fetch;
+
     const process = processWeather(fetch);
 
     return process;

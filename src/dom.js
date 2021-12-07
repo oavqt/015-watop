@@ -1,5 +1,6 @@
 import element from './element';
-import placeholder from './images/placeholder.png';
+import placeholder from './images/myPlaceholder.png';
+import edit from './images/myEdit.png';
 
 const display = {
   skeleton: () => {
@@ -28,8 +29,8 @@ const display = {
             element.create('h1', { class: 'location__text' }, 'Unknown'),
             element.create(
               'button',
-              { class: 'button--location--change' },
-              element.create('span', { class: 'change__text' }, 'Change')
+              { class: 'button--location--edit' },
+              element.create('img', { class: 'img--edit', src: edit })
             )
           ),
           element.create(
@@ -93,6 +94,20 @@ const display = {
             { class: 'body__overlay' },
             element.create(
               'div',
+              { class: 'overlay__information' },
+              element.create(
+                'div',
+                { class: 'information__logo' },
+                element.create('img', { class: 'img--logo', src: placeholder })
+              ),
+              element.create(
+                'div',
+                { class: 'information__title' },
+                element.create('h1', { class: 'title__text' }, 'Le Weather')
+              )
+            ),
+            element.create(
+              'div',
               { class: 'overlay__option' },
               element.create(
                 'form',
@@ -106,7 +121,12 @@ const display = {
                     element.create('input', {
                       class: 'input--location',
                       placeholder: 'Location'
-                    })
+                    }),
+                    element.create(
+                      'span',
+                      { class: 'location__error' },
+                      'Please insert a valid location'
+                    )
                   )
                 ),
                 element.create(
