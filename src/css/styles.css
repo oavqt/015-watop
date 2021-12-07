@@ -1,11 +1,11 @@
 @import url(nreset.css);
 
 .--fade--in {
-  animation: fade-in 1s ease-in forwards;
+  animation: fade-in 0.9s ease-in forwards;
 }
 
 .--fade--out {
-  animation: fade-out 1s ease-out forwards;
+  animation: fade-out 0.3s ease-out forwards;
 }
 
 body {
@@ -100,12 +100,12 @@ input[type='radio']:hover {
   width: 100vw;
 }
 
-.content__weather {
+.content__primary {
   height: 100%;
   width: 100%;
 }
 
-.weather__home {
+.primary__home {
   align-items: center;
   display: flex;
   height: 75%;
@@ -128,7 +128,7 @@ input[type='radio']:hover {
   width: 100%;
 }
 
-.body__location {
+.weather__location {
   display: flex;
 }
 
@@ -141,7 +141,7 @@ input[type='radio']:hover {
   margin: 0;
 }
 
-.body__card {
+.weather__card {
   display: flex;
 }
 

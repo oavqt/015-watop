@@ -6,10 +6,10 @@ const display = {
   skeleton: () => {
     const page = element.create(
       'div',
-      { class: 'content__weather' },
+      { class: 'content__primary' },
       element.create(
         'div',
-        { class: 'weather__home' },
+        { class: 'primary__home' },
         element.create(
           'div',
           { class: 'home__title' },
@@ -20,72 +20,84 @@ const display = {
           { class: 'home__body' },
           element.create(
             'div',
-            { class: 'body__current' },
-            element.create('h2', { class: 'current__text' }, 'Unknown')
-          ),
-          element.create(
-            'div',
-            { class: 'body__location' },
-            element.create('h1', { class: 'location__text' }, 'Unknown'),
-            element.create(
-              'button',
-              { class: 'button--location--edit' },
-              element.create('img', { class: 'img--edit', src: edit })
-            )
-          ),
-          element.create(
-            'div',
-            { class: 'body__card' },
+            { class: 'body__weather' },
             element.create(
               'div',
-              { class: 'card__description' },
-              element.create('img', {
-                class: 'img--description',
-                src: placeholder
-              })
+              { class: 'weather__current' },
+              element.create('h2', { class: 'current__text' }, 'Unknown')
             ),
             element.create(
               'div',
-              { class: 'card__temperature' },
+              { class: 'weather__location' },
+              element.create('h1', { class: 'location__text' }, 'Unknown'),
               element.create(
-                'div',
-                { class: 'temperature__number' },
-                element.create('span', { class: 'number__text' }, '000')
-              ),
-              element.create(
-                'div',
-                { class: 'temperature__symbol --celsius' },
-                element.create('span', { class: 'symbol__text' }, '℃')
+                'button',
+                { class: 'button--location--edit' },
+                element.create('img', { class: 'img--edit', src: edit })
               )
             ),
             element.create(
               'div',
-              { class: 'card__misc' },
+              { class: 'weather__card' },
               element.create(
                 'div',
-                { class: 'misc__feels' },
-                element.create('span', { class: 'feels__text' }, 'Feels Like:'),
-                element.create('span', { class: 'feels__number' }, '000'),
-                element.create('span', { class: 'feels__symbol' }, '℃')
+                { class: 'card__description' },
+                element.create('img', {
+                  class: 'img--description',
+                  src: placeholder
+                })
               ),
               element.create(
                 'div',
-                { class: 'misc__wind' },
-                element.create('span', { class: 'wind__text' }, 'Wind:'),
-                element.create('span', { class: 'wind__direction' }, 'Unknown'),
-                element.create('span', { class: 'wind__number' }, '000'),
-                element.create('span', { class: 'wind__symbol' }, 'kp/h')
-              ),
-              element.create(
-                'div',
-                { class: 'misc__humidity' },
+                { class: 'card__temperature' },
                 element.create(
-                  'span',
-                  { class: 'humidity__text' },
-                  'Humidity:'
+                  'div',
+                  { class: 'temperature__number' },
+                  element.create('span', { class: 'number__text' }, '000')
                 ),
-                element.create('span', { class: 'humidity__number' }, '000'),
-                element.create('span', { class: 'humidity__percentage' }, '%')
+                element.create(
+                  'div',
+                  { class: 'temperature__symbol --celsius' },
+                  element.create('span', { class: 'symbol__text' }, '℃')
+                )
+              ),
+              element.create(
+                'div',
+                { class: 'card__misc' },
+                element.create(
+                  'div',
+                  { class: 'misc__feels' },
+                  element.create(
+                    'span',
+                    { class: 'feels__text' },
+                    'Feels Like:'
+                  ),
+                  element.create('span', { class: 'feels__number' }, '000'),
+                  element.create('span', { class: 'feels__symbol' }, '℃')
+                ),
+                element.create(
+                  'div',
+                  { class: 'misc__wind' },
+                  element.create('span', { class: 'wind__text' }, 'Wind:'),
+                  element.create(
+                    'span',
+                    { class: 'wind__direction' },
+                    'Unknown'
+                  ),
+                  element.create('span', { class: 'wind__number' }, '000'),
+                  element.create('span', { class: 'wind__symbol' }, 'kp/h')
+                ),
+                element.create(
+                  'div',
+                  { class: 'misc__humidity' },
+                  element.create(
+                    'span',
+                    { class: 'humidity__text' },
+                    'Humidity:'
+                  ),
+                  element.create('span', { class: 'humidity__number' }, '000'),
+                  element.create('span', { class: 'humidity__percentage' }, '%')
+                )
               )
             )
           ),

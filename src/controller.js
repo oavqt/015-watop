@@ -10,6 +10,7 @@ const setWeather = async () => {
       return dom.display.update.page.location.error(weatherData);
 
     return (
+      dom.display.update.page.overlay.inactive(),
       dom.display.load.skeleton(),
       dom.display.update.page.weather(weatherData, weatherSymbol)
     );
@@ -18,11 +19,27 @@ const setWeather = async () => {
   }
 };
 
+const editLocation = () => {
+  dom.display.update.page.overlay.active();
+};
+
 const setWeatherEvent = () => {
   dom.get.element.button.search().addEventListener('click', (e) => {
     setWeather();
     e.preventDefault();
   });
+};
+
+const editLocationEvent = () => {
+  dom.get.element.button.edit().addEventListener('click', (e) => {
+    editLocation();
+    e.preventDefault();
+  });
+};
+
+const loadEvents = () => {
+  setWeatherEvent();
+  editLocationEvent();
 };
 
 const onload = () => {
@@ -36,5 +53,5 @@ const onload = () => {
 window.addEventListener('load', () => {
   dom.display.clear(); // Temporary HMS
   onload();
-  setWeatherEvent();
+  loadEvents();
 });

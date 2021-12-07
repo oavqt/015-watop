@@ -7,12 +7,21 @@ const dom = {
         return document.querySelector('.content');
       },
       page: {
+        body: () => {
+          return document.querySelector('.home__body');
+        },
         search: () => {
           return document.querySelector('.home__search');
+        },
+        overlay: () => {
+          return document.querySelector('.body__overlay');
         }
       },
 
       weather: {
+        body: () => {
+          return document.querySelector('.body__weather');
+        },
         location: {
           name: () => {
             return document.querySelector('.location__text');
@@ -78,8 +87,8 @@ const dom = {
         cancel: () => {
           return document.querySelector('.button--cancel');
         },
-        change: () => {
-          return document.querySelector('.button--location--change');
+        edit: () => {
+          return document.querySelector('.button--location--edit');
         }
       }
     },
@@ -106,6 +115,35 @@ const dom = {
     },
     update: {
       page: {
+        overlay: {
+          active: () => {
+            const locationInput = dom.get.element.input.location();
+            const locationName = dom.get.element.weather.location.name();
+            const locationError = dom.get.element.weather.location.error();
+
+            const overlay = dom.get.element.page.overlay();
+            const body = dom.get.element.weather.body();
+
+            locationInput.value = locationName.textContent;
+            locationError.classList.remove('location__error--active');
+
+            overlay.classList.remove('--fade--out');
+            body.classList.remove('--fade--in');
+
+            overlay.classList.add('--fade--in');
+            body.classList.add('--fade--out');
+          },
+          inactive: () => {
+            const overlay = dom.get.element.page.overlay();
+            const body = dom.get.element.weather.body();
+
+            overlay.classList.remove('--fade--in');
+            body.classList.remove('--fade--out');
+
+            overlay.classList.add('--fade--out');
+            body.classList.add('--fade--in');
+          }
+        },
         location: {
           error: (error) => {
             const err = dom.get.element.weather.location.error();
