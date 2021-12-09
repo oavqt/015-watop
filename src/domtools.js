@@ -174,6 +174,10 @@ const dom = {
               err.textContent = 'Please enter a valid location name.';
 
               err.classList.add('location__error--active');
+            } else if (error === 'No Data') {
+              err.textContent = 'Please enter a location.';
+
+              err.classList.add('location__error--active');
             } else {
               err.textContent =
                 'We are sorry, Le weather is currently unavailable.';

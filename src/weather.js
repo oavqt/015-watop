@@ -1,13 +1,10 @@
 import getWeather from './weathertools';
 
 const weather = (() => {
-  const storage = {
-    data: { location: 'temple, tx' },
-    symbol: {}
-  };
+  const storage = { data: {}, symbol: {} };
 
   const update = {
-    storage: (location) => {
+    location: (location) => {
       storage.data = location;
     },
     symbol: (symbol) => {
@@ -16,13 +13,19 @@ const weather = (() => {
   };
 
   const get = {
+    location: () => {
+      if (storage.data.location !== undefined)
+        return storage.data.location.display();
+
+      return 'No Data';
+    },
     weather: async (location) => {
       try {
         const weatherData = await getWeather(location);
 
-        if (weatherData === 400) return weatherData;
+        if (typeof weatherData !== 'object') return weatherData;
 
-        update.storage(weatherData);
+        update.location(weatherData);
 
         return storage.data;
       } catch (err) {
@@ -34,18 +37,18 @@ const weather = (() => {
         weather: {
           temperature: {
             celsius: {
-              number: storage.data.locationweather.temperature.celsius.number,
-              feels: storage.data.locationweather.temperature.celsius.feels
+              number: storage.data.location.weather.temperature.celsius.number,
+              feels: storage.data.location.weather.temperature.celsius.feels
             },
             fahrenheit: {
               number:
-                storage.data.locationweather.temperature.fahrenheit.number,
-              feels: storage.data.locationweather.temperature.fahrenheit.feels
+                storage.data.location.weather.temperature.fahrenheit.number,
+              feels: storage.data.location.weather.temperature.fahrenheit.feels
             }
           },
           wind: {
-            kph: storage.data.locationweather.wind.kph,
-            mph: storage.data.locationweather.wind.mph
+            kph: storage.data.location.weather.wind.kph,
+            mph: storage.data.location.weather.wind.mph
           }
         }
       };
@@ -55,12 +58,12 @@ const weather = (() => {
   const onload = async () => {
     try {
       if (storage.data.location !== undefined) {
-        await get.weather(storage.data.location);
+        await get.weather(storage.data.location.display());
 
         return [storage.data, storage.symbol.value];
       }
 
-      return 'default';
+      return ['No Data'];
     } catch (err) {
       throw new Error(err);
     }

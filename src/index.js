@@ -2,7 +2,7 @@ require('./css/styles.css');
 require('./controller');
 
 // Server HMR
-const start = require('./weather');
+const start = require('./controller');
 
 const content = document.querySelector('.content');
 
@@ -13,5 +13,5 @@ if (module.hot) {
     content.removeChild(content.lastChild);
   }
 
-  start.default.onload();
+  start.default();
 }

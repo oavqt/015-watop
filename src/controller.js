@@ -8,12 +8,11 @@ const setLocation = async () => {
     );
     const weatherSymbol = dom.get.value.input.symbol();
 
-    if (weatherData === 400)
+    if (typeof weatherData !== 'object')
       return dom.display.update.page.location.error(weatherData);
 
     return (
       dom.display.update.page.overlay.inactive(),
-      dom.display.load.skeleton(),
       dom.display.update.page.weather(weatherData, weatherSymbol),
       weather.update.symbol(weatherSymbol)
     );
@@ -22,8 +21,22 @@ const setLocation = async () => {
   }
 };
 
+const cancelLocation = () => {
+  const status = weather.get.location();
+
+  if (status !== 'No Data') dom.display.update.page.overlay.inactive();
+  else dom.display.update.page.location.error(status);
+};
+
 const editLocation = () => {
   dom.display.update.page.overlay.active();
+};
+
+const cancelLocationEvent = () => {
+  dom.get.element.button.cancel().addEventListener('click', (e) => {
+    cancelLocation();
+    e.preventDefault();
+  });
 };
 
 const setLocationEvent = () => {
@@ -41,6 +54,7 @@ const editLocationEvent = () => {
 };
 
 const loadLocationEvents = () => {
+  cancelLocationEvent();
   setLocationEvent();
   editLocationEvent();
 };
@@ -48,7 +62,7 @@ const loadLocationEvents = () => {
 const onload = async () => {
   const [weatherData, weatherSymbol] = await weather.onload();
 
-  if (weatherData !== 'default') {
+  if (weatherData !== 'No Data') {
     dom.display.load.home();
     dom.display.update.page.weather(weatherData, weatherSymbol);
   } else {
@@ -62,3 +76,5 @@ window.addEventListener('load', () => {
   dom.display.clear(); // Temporary HMS
   onload();
 });
+
+export default onload;

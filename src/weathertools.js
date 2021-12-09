@@ -1,23 +1,3 @@
-// Temperature converter
-const temperature = {
-  convert: {
-    celsius: (value) => {
-      const int = Number(value);
-
-      if (typeof value === 'object' || Number.isNaN(int))
-        throw new Error('Value is not a number');
-      else return int * (9 / 5) + 32;
-    },
-    fahrenheit: (value) => {
-      const int = Number(value);
-
-      if (typeof value === 'object' || Number.isNaN(int))
-        throw new Error('Value is not a number');
-      else return (int - 32) * (5 / 9);
-    }
-  }
-};
-
 // Weather functions
 async function fetchWeather(location) {
   const publicKey = 'd50e03bdd93c4f7f9b811406212711';
@@ -29,7 +9,7 @@ async function fetchWeather(location) {
 
     const weather = await response.json();
 
-    if (response.status === 400) return response.status;
+    if (response.status !== 200) return response.status;
 
     return weather;
   } catch (err) {
@@ -80,7 +60,7 @@ async function getWeather(location) {
   try {
     const fetch = await fetchWeather(location);
 
-    if (fetch === 400) return fetch;
+    if (typeof fetch !== 'object') return fetch;
 
     const process = processWeather(fetch);
 
