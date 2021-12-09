@@ -151,6 +151,13 @@ const dom = {
             overlay.classList.add('--fade--out');
             body.classList.add('--fade--in');
           },
+          symbol: (symbol) => {
+            const celsius = dom.get.element.input.celsius();
+            const fahrenheit = dom.get.element.input.fahrenheit();
+
+            if (symbol === 'fahrenheit') fahrenheit.checked = true;
+            else celsius.checked = true;
+          },
           default: () => {
             const overlay = dom.get.element.page.overlay();
             const body = dom.get.element.weather.body();

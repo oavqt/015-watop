@@ -22,14 +22,17 @@ const setLocation = async () => {
 };
 
 const cancelLocation = () => {
-  const status = weather.get.location();
+  const status = weather.get.data.location();
 
   if (status !== 'No Data') dom.display.update.page.overlay.inactive();
   else dom.display.update.page.location.error(status);
 };
 
 const editLocation = () => {
+  const symbol = weather.get.data.symbol();
+
   dom.display.update.page.overlay.active();
+  dom.display.update.page.overlay.symbol(symbol);
 };
 
 const cancelLocationEvent = () => {
