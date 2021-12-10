@@ -78,7 +78,7 @@ const onload = async () => {
 };
 
 window.addEventListener('load', () => {
-  dom.display.clear(); // Temporary HMS
+  // dom.display.clear(); // Server HMR
   onload();
 });
 

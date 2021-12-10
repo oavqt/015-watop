@@ -28,6 +28,22 @@
   visibility: visible;
 }
 
+a {
+  text-decoration: none;
+}
+
+.a--github {
+  align-items: center;
+  color: #afd2e9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.a--github:hover {
+  color: #000000;
+}
+
 body {
   font-family: 'Roboto', sans-serif;
 }
@@ -114,12 +130,17 @@ button:hover {
   justify-content: space-evenly;
 }
 
-.img--description {
+.img--github {
+  height: auto;
+  width: 2.5em;
+}
+
+.img--logo {
   height: auto;
   width: 8em;
 }
 
-.img--logo {
+.img--temperature {
   height: auto;
   width: 8em;
 }
@@ -172,8 +193,10 @@ input[type='radio']:hover {
   width: 100%;
 }
 
+.weather__current,
 .weather__location {
   display: flex;
+  justify-content: center;
 }
 
 .current__text {
@@ -186,22 +209,28 @@ input[type='radio']:hover {
 }
 
 .weather__card {
+  align-items: center;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.card__description,
-.card__misc,
 .card__temperature {
   align-items: center;
   display: flex;
-  justify-content: space-evenly;
-  margin-right: 1em;
+  justify-content: center;
 }
 
-.card__description,
+.temperature__information {
+  align-items: center;
+  display: flex;
+}
+
 .card__misc {
-  align-items: flex-start;
-  flex-direction: column;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 75%;
 }
 
 .card__misc span {
@@ -216,7 +245,7 @@ input[type='radio']:hover {
   margin-right: unset !important;
 }
 
-.temperature__number {
+.number__text {
   font-size: 5rem;
   font-weight: bold;
 }
@@ -243,6 +272,10 @@ input[type='radio']:hover {
 
 .overlay__information .title__text {
   font-size: 3.5rem;
+}
+
+.information__tag {
+  position: absolute;
 }
 
 .button__load {
@@ -317,4 +350,93 @@ input[type='radio']:hover {
   display: flex;
   justify-content: space-evenly;
   width: 45%;
+}
+
+@media screen and (max-width: 1069px) {
+  .button--location--edit {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+
+  .button--search,
+  .label--celsius {
+    margin-right: 0.5em;
+  }
+
+  .input--location {
+    width: 100%;
+  }
+
+  .content {
+    padding: 1em;
+  }
+
+  .primary__home {
+    height: 100%;
+    width: 100%;
+  }
+
+  .home__body {
+    height: 100%;
+    width: 100%;
+  }
+
+  .body__weather {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .location__text {
+    font-size: 1.5rem;
+  }
+
+  .body__overlay {
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .overlay__information .title__text {
+    font-size: 2rem;
+  }
+
+  .overlay__option {
+    height: 25%;
+    width: 100%;
+  }
+
+  .option__button,
+  .option__location,
+  .option__symbol {
+    width: 100%;
+  }
+
+  .option__button,
+  .option__symbol {
+    display: flex;
+    justify-content: center;
+  }
+
+  .option__symbol {
+    justify-content: flex-end;
+  }
+
+  .button__load {
+    margin-right: 0.5em;
+  }
+}
+
+@media screen and (max-width: 369px) {
+  .number__text {
+    font-size: 4.5rem;
+  }
+
+  .symbol__text {
+    font-size: 2rem;
+  }
+
+  .card__misc {
+    width: 100%;
+  }
 }

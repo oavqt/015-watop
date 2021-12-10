@@ -1,6 +1,7 @@
 import element from './element';
 import placeholder from './images/myPlaceholder.png';
 import edit from './images/myEdit.png';
+import github from './images/myGithub.png';
 
 const display = {
   skeleton: () => {
@@ -41,24 +42,28 @@ const display = {
               { class: 'weather__card' },
               element.create(
                 'div',
-                { class: 'card__description' },
-                element.create('img', {
-                  class: 'img--description',
-                  src: placeholder
-                })
-              ),
-              element.create(
-                'div',
                 { class: 'card__temperature' },
                 element.create(
                   'div',
-                  { class: 'temperature__number' },
-                  element.create('span', { class: 'number__text' }, '000')
+                  { class: 'temperature__image' },
+                  element.create('img', {
+                    class: 'img--temperature',
+                    src: placeholder
+                  })
                 ),
                 element.create(
                   'div',
-                  { class: 'temperature__symbol --celsius' },
-                  element.create('span', { class: 'symbol__text' }, '°C')
+                  { class: 'temperature__information' },
+                  element.create(
+                    'div',
+                    { class: 'information__number' },
+                    element.create('span', { class: 'number__text' }, '000')
+                  ),
+                  element.create(
+                    'div',
+                    { class: 'information__symbol --celsius' },
+                    element.create('span', { class: 'symbol__text' }, '°C')
+                  )
                 )
               ),
               element.create(
@@ -116,6 +121,23 @@ const display = {
                 'div',
                 { class: 'information__title' },
                 element.create('h1', { class: 'title__text' }, 'Le Weather')
+              ),
+              element.create(
+                'div',
+                { class: 'information__tag' },
+                element.create(
+                  'a',
+                  {
+                    class: 'a--github',
+                    href: 'https://github.com/oavqt',
+                    target: '_blank'
+                  },
+                  element.create('img', {
+                    class: 'img--github',
+                    src: github
+                  }),
+                  element.create('span', { class: 'tag__title' }, 'Oav')
+                )
               )
             ),
             element.create(
