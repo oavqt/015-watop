@@ -58,7 +58,7 @@ const display = {
                 element.create(
                   'div',
                   { class: 'temperature__symbol --celsius' },
-                  element.create('span', { class: 'symbol__text' }, '℃')
+                  element.create('span', { class: 'symbol__text' }, '°C')
                 )
               ),
               element.create(
@@ -73,7 +73,7 @@ const display = {
                     'Feels Like:'
                   ),
                   element.create('span', { class: 'feels__number' }, '000'),
-                  element.create('span', { class: 'feels__symbol' }, '℃')
+                  element.create('span', { class: 'feels__symbol' }, '°C')
                 ),
                 element.create(
                   'div',
@@ -191,6 +191,11 @@ const display = {
                     'button',
                     { class: 'button--search' },
                     'Search'
+                  ),
+                  element.create(
+                    'div',
+                    { class: 'button__load' },
+                    element.create('span', { class: 'load__loader' })
                   ),
                   element.create(
                     'button',

@@ -89,6 +89,11 @@ const dom = {
         },
         edit: () => {
           return document.querySelector('.button--location--edit');
+        },
+        overlay: {
+          loader: () => {
+            return document.querySelector('.button__load');
+          }
         }
       }
     },
@@ -134,6 +139,7 @@ const dom = {
 
             locationInput.value = locationName.textContent;
             locationError.classList.remove('location__error--active');
+            dom.display.update.page.overlay.loader('inactive');
 
             overlay.classList.remove('--fade--out');
             body.classList.remove('--fade--in');
@@ -150,6 +156,18 @@ const dom = {
 
             overlay.classList.add('--fade--out');
             body.classList.add('--fade--in');
+          },
+          loader: (state) => {
+            const search = dom.get.element.button.search();
+            const loader = dom.get.element.button.overlay.loader();
+
+            if (state === 'active') {
+              search.classList.add('--display--none');
+              loader.classList.add('--display--flex');
+            } else {
+              search.classList.remove('--display--none');
+              loader.classList.remove('--display--flex');
+            }
           },
           symbol: (symbol) => {
             const celsius = dom.get.element.input.celsius();
@@ -191,6 +209,8 @@ const dom = {
 
               err.classList.add('location__error--active');
             }
+
+            dom.display.update.page.overlay.loader('inactive');
           }
         },
         weather: (process, symbol = 'celsius') => {
@@ -216,10 +236,10 @@ const dom = {
 
             temperatureNumber.textContent =
               process.weather.temperature.fahrenheit.number;
-            temperatureSymbol.textContent = '℉';
+            temperatureSymbol.textContent = '°F';
 
             feels.textContent = process.weather.temperature.fahrenheit.feels;
-            feelsSymbol.textContent = '℉';
+            feelsSymbol.textContent = '°F';
 
             windDirection.textContent = process.weather.wind.direction;
             windNumber.textContent = process.weather.wind.mph;
@@ -233,10 +253,10 @@ const dom = {
 
             temperatureNumber.textContent =
               process.weather.temperature.celsius.number;
-            temperatureSymbol.textContent = '℃';
+            temperatureSymbol.textContent = '°C';
 
             feels.textContent = process.weather.temperature.celsius.feels;
-            feelsSymbol.textContent = '℃';
+            feelsSymbol.textContent = '°C';
 
             windDirection.textContent = process.weather.wind.direction;
             windNumber.textContent = process.weather.wind.kph;

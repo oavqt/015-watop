@@ -2,6 +2,8 @@ import dom from './domtools';
 import weather from './weather';
 
 const setLocation = async () => {
+  dom.display.update.page.overlay.loader('active');
+
   try {
     const weatherData = await weather.get.weather(
       dom.get.value.input.location()
