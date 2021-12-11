@@ -4,7 +4,10 @@ async function fetchWeather(location) {
 
   try {
     const response = await fetch(
-      `https://api.weatherapi.com/v1/current.json?key=${publicKey}&q=${location}`
+      `https://api.weatherapi.com/v1/current.json?key=${publicKey}&q=${location}`,
+      {
+        mode: 'cors'
+      }
     );
 
     const weather = await response.json();
