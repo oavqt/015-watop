@@ -6,6 +6,11 @@ const dom = {
       content: () => {
         return document.querySelector('.content');
       },
+      loader: {
+        primary: () => {
+          return document.querySelector('.content__loader');
+        }
+      },
       page: {
         body: () => {
           return document.querySelector('.home__body');
@@ -124,6 +129,11 @@ const dom = {
       home: () => {
         display.skeleton();
         dom.display.update.page.overlay.home();
+      },
+      loader: {
+        primary: () => {
+          display.loader();
+        }
       }
     },
     update: {

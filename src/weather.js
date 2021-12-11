@@ -120,7 +120,8 @@ const weather = (() => {
   };
 
   const onload = async () => {
-    storage = JSON.parse(local.storage.get('storage'));
+    const cached = JSON.parse(local.storage.get('storage'));
+    if (cached) storage = cached;
 
     try {
       if (storage.data.location !== undefined) {

@@ -165,6 +165,21 @@ input[type='radio']:hover {
   width: 100vw;
 }
 
+.content__loader {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+}
+
+.load__text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+
 .content__primary {
   height: 100%;
   width: 100%;

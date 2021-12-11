@@ -67,6 +67,8 @@ const loadLocationEvents = () => {
 const onload = async () => {
   const [weatherData, weatherSymbol] = await weather.onload();
 
+  dom.display.clear();
+
   if (weatherData !== 'No Data') {
     dom.display.load.home();
     dom.display.update.page.weather(weatherData, weatherSymbol);
@@ -78,8 +80,11 @@ const onload = async () => {
 };
 
 window.addEventListener('load', () => {
-  // dom.display.clear(); // Server HMR
-  onload();
+  dom.display.load.loader.primary();
+
+  setTimeout(() => {
+    onload();
+  }, 5000);
 });
 
 export default onload;

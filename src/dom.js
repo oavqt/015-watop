@@ -4,6 +4,19 @@ import edit from './images/myEdit.png';
 import github from './images/myGithub.png';
 
 const display = {
+  loader: () => {
+    const page = element.create(
+      'div',
+      { class: 'content__loader' },
+      element.create('span', { class: 'load__loader' }),
+      element.create(
+        'span',
+        { class: 'load__text' },
+        'please wait...the hamsters wake up slowly, yawning and stretching.'
+      )
+    );
+    document.querySelector('.content').appendChild(page);
+  },
   skeleton: () => {
     const page = element.create(
       'div',

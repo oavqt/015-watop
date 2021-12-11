@@ -19,7 +19,7 @@ const theProductionConfig = {
       },
       {
         test: /\.(png|svg|jpg|jpeg|gir)$/i,
-        type: 'asset'
+        type: 'asset/resource'
       }
     ]
   },

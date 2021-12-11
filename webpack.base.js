@@ -3,7 +3,7 @@ const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const theBaseConfig = {
   entry: {
-    theMain: './src/index.js'
+    main: './src/index.js'
   },
   module: {
     rules: [
@@ -18,7 +18,7 @@ const theBaseConfig = {
     clean: true,
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    publicPath: './'
   },
   plugins: [
     new HTMLWebpackPlugin({
